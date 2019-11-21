@@ -5,20 +5,24 @@ using UnityEngine.UI;
 public class PlayerTrigger : MonoBehaviour
 {
     [SerializeField, Range(0, 1f)] private float fireRate;
+    [SerializeField]private  FixedButton ShootButton;
+
     [SerializeField] Animator animator;
     [SerializeField] AudioSource source;
     [SerializeField] ParticleSystem particles;
-    [SerializeField] Slider FireRateslider;
     private bool canShoot = true;
 
-    public void UpdateSlide()
-     {
-          fireRate =FireRateslider.value;
-     }
+   
     private void Update()
     {
-       
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        
+      /* if (Input.touchCount > 0)
+        {
+            var touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began && canShoot)
+                StartCoroutine(Fire());
+        }*/
+        if (ShootButton.Pressed)
         {
             if (canShoot)
                 StartCoroutine(Fire());
